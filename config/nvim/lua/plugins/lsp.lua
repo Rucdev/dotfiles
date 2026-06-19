@@ -44,7 +44,11 @@ return {
       })
 
       local capabilities = require("blink.cmp").get_lsp_capabilities()
-      local lspconfig = require("lspconfig")
+
+      -- 全サーバー共通の設定
+      vim.lsp.config("*", {
+        capabilities = capabilities,
+      })
 
       -- サーバーごとの追加設定（必要に応じて追記）
       local servers = {
@@ -60,9 +64,8 @@ return {
       }
 
       for server, config in pairs(servers) do
-        lspconfig[server].setup(vim.tbl_deep_extend("force", {
-          capabilities = capabilities,
-        }, config))
+        vim.lsp.config(server, config)
+        vim.lsp.enable(server)
       end
     end,
   },
