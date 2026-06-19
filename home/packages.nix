@@ -6,7 +6,13 @@
 
     git
     gh
+    ghq       # リポジトリを ~/ghq 配下に整理して clone
+    lazygit   # git の TUI
     nh        # nicer home-manager UX: `nh home switch ~/dotfiles`
+
+    # シェル統合は config/bash/bashrc 内の init で有効化済み
+    zoxide    # `z` で賢い cd
+    starship  # プロンプト
 
     # 日常の便利系（不要なら削る）
     eza
