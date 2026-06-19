@@ -5,6 +5,7 @@
     ./neovim.nix
     ./tmux.nix
     ./bash.nix
+    ./starship.nix
   ];
 
   home.username = "ruc";
