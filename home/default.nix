@@ -3,7 +3,6 @@
   imports = [
     ./packages.nix
     ./neovim.nix
-    ./tmux.nix
     ./bash.nix
     ./starship.nix
   ];
@@ -27,4 +26,6 @@
     enable = true;
     nix-direnv.enable = true;
   };
+
+  programs.hunk.enable = true; # AIエージェント向けのレビュー用ターミナル diff ビューア (`hunk diff` / `hunk show`)
 }

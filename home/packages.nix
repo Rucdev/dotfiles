@@ -9,10 +9,18 @@
     ghq       # リポジトリを ~/ghq 配下に整理して clone
     lazygit   # git の TUI
     nh        # nicer home-manager UX: `nh home switch ~/dotfiles`
+    herdr     # ターミナル内エージェントマルチプレクサ
 
     # シェル統合は config/bash/bashrc 内の init で有効化済み
     zoxide    # `z` で賢い cd
     starship  # プロンプト
+
+    # 言語ツールチェイン
+    bun       # JS/TSランタイム & パッケージマネージャ
+    uv        # Pythonパッケージマネージャ
+    go        # Goコンパイラ
+    cargo     # Rustパッケージマネージャ（rustcも同梱）
+    dotnet-sdk  # .NET Core SDK
 
     # 日常の便利系（不要なら削る）
     eza

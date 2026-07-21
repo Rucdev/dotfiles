@@ -7,9 +7,13 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hunk = {
+      url = "github:modem-dev/hunk";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, hunk, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -19,7 +23,10 @@
     in {
       homeConfigurations."ruc" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./home/default.nix ];
+        modules = [
+          ./home/default.nix
+          hunk.homeManagerModules.default
+        ];
       };
     };
 }
