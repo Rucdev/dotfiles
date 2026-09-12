@@ -19,7 +19,8 @@
     bun       # JS/TSランタイム & パッケージマネージャ
     uv        # Pythonパッケージマネージャ
     go        # Goコンパイラ
-    cargo     # Rustパッケージマネージャ（rustcも同梱）
+    cargo     # Rustパッケージマネージャ
+    rustc     # Rustコンパイラ (cargo とは別パッケージ。rust-analyzer が sysroot 解決に使う)
     dotnet-sdk  # .NET Core SDK
 
     # 日常の便利系（不要なら削る）

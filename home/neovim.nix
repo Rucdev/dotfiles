@@ -9,6 +9,18 @@ in
   home.packages = with pkgs; [
     neovim
     nodejs # neovim の Node.js プロバイダ用
+
+    # LSP サーバー (mason の代わりに Nix で管理)
+    # nvim 側は config/nvim/lua/plugins/lsp.lua の servers に追記して vim.lsp.enable する。
+    # nvim-lspconfig のデフォルト cmd が PATH 上のバイナリを探すので、ここに入れるだけで動く。
+    lua-language-server # lua_ls
+    nil                 # nil_ls (Nix)
+    gopls               # gopls (Go)
+    rust-analyzer       # rust_analyzer (Rust)
+    typescript-language-server # ts_ls (TypeScript / JavaScript)
+    typescript          # ts_ls / astro が tsserver 本体として参照する
+    ty                  # ty (Python, Astral 製)
+    astro-language-server # astro
   ];
 
   home.sessionVariables = {
