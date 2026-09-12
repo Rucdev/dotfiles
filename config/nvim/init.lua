@@ -44,3 +44,7 @@ require("lazy").setup({
   install = { colorscheme = { "habamax" } },
   checker = { enabled = false },
 })
+
+-- Keymaps
+vim.keymap.set("i", "jj", "<Esc>", { desc = "Exit insert mode" })
+vim.keymap.set("n", ";", ":", { desc = "Enter command-line mode" })
