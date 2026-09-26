@@ -41,19 +41,61 @@ dotfiles/
 4. 初回適用（home-manager 未インストール状態から）:
 
    ```sh
-   nix run home-manager/master -- switch --flake ~/dotfiles#yushi@fedora
+   nix run home-manager/master -- switch --flake ~/dotfiles#ruc
    ```
 
 5. 以降は:
 
    ```sh
-   home-manager switch --flake ~/dotfiles#yushi@fedora
+   home-manager switch --flake ~/dotfiles#ruc
    # または nh home switch ~/dotfiles
    ```
 
 ## 初回の後始末
 
 - Neovim: 起動すると lazy.nvim が自動 bootstrap。`:Lazy sync` でプラグイン取得。
+
+## パッケージのアップグレード
+
+パッケージのバージョンは `flake.lock` で固定されている。更新するには lock を上げてから適用する。
+
+1. flake inputs を更新:
+
+   ```sh
+   cd ~/dotfiles
+   nix flake update              # 全 input (nixpkgs / home-manager / hunk)
+   # nix flake update nixpkgs    # 特定の input だけ上げる場合
+   ```
+
+2. 差分を確認して適用:
+
+   ```sh
+   nh home switch ~/dotfiles     # ビルド前後のパッケージ差分を表示してから switch
+   # または home-manager switch --flake ~/dotfiles#ruc
+   ```
+
+3. 問題なければ lock をコミット:
+
+   ```sh
+   git add flake.lock
+   git commit -m "update pkgs"
+   ```
+
+ロールバックしたい場合:
+
+```sh
+git checkout HEAD~1 -- flake.lock && nh home switch ~/dotfiles
+# または直前の世代に戻す
+home-manager generations        # 世代一覧
+<世代のパス>/activate
+```
+
+古い世代・ストアの掃除:
+
+```sh
+nh clean user --keep 5          # 直近 5 世代を残して GC
+# または nix-collect-garbage --delete-older-than 14d
+```
 
 ## メモ
 
