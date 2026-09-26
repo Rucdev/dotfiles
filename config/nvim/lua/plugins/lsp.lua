@@ -47,6 +47,7 @@ return {
         rust_analyzer = {},
         ts_ls = {},
         ty = {},
+        svelte = {},
         astro = {
           -- lspconfig のデフォルトはプロジェクトの node_modules/typescript しか探さない。
           -- 見つからなければ Nix で入れた typescript (tsserver の隣) にフォールバックする。

@@ -21,6 +21,7 @@ in
     typescript          # ts_ls / astro が tsserver 本体として参照する
     ty                  # ty (Python, Astral 製)
     astro-language-server # astro
+    svelte-language-server # svelte
   ];
 
   home.sessionVariables = {
