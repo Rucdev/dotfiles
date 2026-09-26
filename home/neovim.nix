@@ -44,12 +44,33 @@ in
     run ln -sfn "${dotfiles}/config/nvim" "${config.xdg.configHome}/nvim"
   '';
 
-  # tree-sitter パーサを Nix 管理にする場合（既存の xdg.dataFile 運用に合わせる）。
-  # nvim-treesitter をランタイム依存にしないやり方。必要になったら有効化:
-  #
-  # xdg.dataFile."nvim/site/parser".source =
-  #   "${pkgs.symlinkJoin {
-  #      name = "nvim-treesitter-parsers";
-  #      paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
-  #    }}/parser";
+  # tree-sitter のパーサとクエリを Nix で管理する。
+  # nvim-treesitter はプラグインとしては読み込まず、パーサ (.so) とクエリ (.scm) だけを
+  # ~/.local/share/nvim/site (stdpath("data")/site = runtimepath) に置く。
+  # ハイライトの開始は config/nvim/lua/plugins/treesitter.lua の FileType autocmd で行う。
+  # 言語を増やすときは下のリストに追記する (クエリは全言語分入っている)。
+  xdg.dataFile."nvim/site/parser".source =
+    "${pkgs.symlinkJoin {
+       name = "nvim-treesitter-parsers";
+       paths = (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: with p; [
+         svelte
+         astro
+         html
+         css
+         javascript
+         typescript
+         tsx
+         json
+         go
+         rust
+         python
+         nix
+         bash
+         yaml
+         toml
+       ])).dependencies;
+     }}/parser";
+
+  xdg.dataFile."nvim/site/queries".source =
+    "${pkgs.vimPlugins.nvim-treesitter}/runtime/queries";
 }
