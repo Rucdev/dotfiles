@@ -23,6 +23,10 @@
     rustc     # Rustコンパイラ (cargo とは別パッケージ。rust-analyzer が sysroot 解決に使う)
     dotnet-sdk  # .NET Core SDK
 
+    # クリエイティブ系 GUI（GPU ドライバは targets.genericLinux の gpu モジュール経由）
+    godot-mono  # Godot 4 C# 版。コマンド名は `godot-mono`
+    blender
+
     # 日常の便利系（不要なら削る）
     eza
     bat
