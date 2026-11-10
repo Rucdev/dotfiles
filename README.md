@@ -54,6 +54,18 @@ dotfiles/
 ## 初回の後始末
 
 - Neovim: 起動すると lazy.nvim が自動 bootstrap。`:Lazy sync` でプラグイン取得。
+- GPU ドライバ: Nix で入れた GUI アプリ（Godot / Blender など）は Fedora 側の Mesa を使えず、
+  `/run/opengl-driver` にある Nix 側のドライバを探す。初回に一度だけ次を実行してつなぐ
+  （内蔵グラフィックスだけの PC でも必要）:
+
+  ```sh
+  sudo ~/.nix-profile/bin/non-nixos-gpu-setup
+  ```
+
+  - `/etc/tmpfiles.d/non-nixos-gpu.conf` が置かれ、再起動後も `/run/opengl-driver` が自動で作られる。
+  - sudo がパスワードを聞くので、端末で直接実行する。
+  - 確認: `ls -l /run/opengl-driver` でリンクが見え、`godot-mono` / `blender` が起動すれば OK。
+  - ドライバ更新後の `home-manager switch` で再実行を促すメッセージが出たら、同じコマンドをもう一度実行する。
 
 ## パッケージのアップグレード
 
