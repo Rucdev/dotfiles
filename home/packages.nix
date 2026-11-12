@@ -24,7 +24,7 @@
     dotnet-sdk  # .NET Core SDK
 
     # クリエイティブ系 GUI（GPU ドライバは targets.genericLinux の gpu モジュール経由）
-    godot-mono  # Godot 4 C# 版。コマンド名は `godot-mono`
+    godot  # Godot 4 (GDScript 版)。コマンド名は `godot`
     blender
 
     # 日常の便利系（不要なら削る）
