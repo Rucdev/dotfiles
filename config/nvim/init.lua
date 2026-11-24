@@ -45,6 +45,8 @@ require("lazy").setup({
   spec = { { import = "plugins" } },
   install = { colorscheme = { "tokyonight", "habamax" } },
   checker = { enabled = false },
+  -- luarocks が必要なプラグインは使っていないので無効化 (checkhealth のエラー回避)
+  rocks = { enabled = false },
 })
 
 -- Keymaps

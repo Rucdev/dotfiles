@@ -1,14 +1,12 @@
 return {
   "nvim-telescope/telescope.nvim",
-  tag = "0.1.x",
+  version = "*",
   dependencies = {
     "nvim-lua/plenary.nvim",
     {
+      -- ビルド済みのものを Nix (home/neovim.nix) で配置している
       "nvim-telescope/telescope-fzf-native.nvim",
-      build = "make",
-      cond = function()
-        return vim.fn.executable("make") == 1
-      end,
+      dir = vim.fn.stdpath("data") .. "/telescope-fzf-native.nvim",
     },
   },
   event = "VeryLazy",

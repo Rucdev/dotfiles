@@ -73,4 +73,10 @@ in
 
   xdg.dataFile."nvim/site/queries".source =
     "${pkgs.vimPlugins.nvim-treesitter}/runtime/queries";
+
+  # telescope-fzf-native は C 拡張のビルドが必要だが、環境に make / cc が無いので
+  # nixpkgs のビルド済みを置き、lazy.nvim からは dir 指定で読み込む
+  # (config/nvim/lua/plugins/telescope.lua)。
+  xdg.dataFile."nvim/telescope-fzf-native.nvim".source =
+    pkgs.vimPlugins.telescope-fzf-native-nvim;
 }

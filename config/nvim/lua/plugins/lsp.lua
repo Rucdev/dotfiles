@@ -11,20 +11,19 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspAttach", { clear = true }),
         callback = function(ev)
+          -- 以下は Neovim 標準のマップに任せる (:h lsp-defaults / diagnostic-defaults):
+          --   grr 参照 / gra コードアクション / grn リネーム / gri 実装 / grt 型定義 /
+          --   grx codelens / gO シンボル / [d ]d 診断移動
           local map = function(keys, func, desc)
-            vim.keymap.set("n", keys, func, { buffer = ev.buf, desc = desc })
+            vim.keymap.set("n", keys, func, { buf = ev.buf, desc = desc })
           end
           map("gd", vim.lsp.buf.definition, "Go to Definition")
           map("gD", vim.lsp.buf.declaration, "Go to Declaration")
-          map("gr", vim.lsp.buf.references, "Go to References")
           map("gI", vim.lsp.buf.implementation, "Go to Implementation")
           map("K", vim.lsp.buf.hover, "Hover Documentation")
           map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
           map("<leader>rn", vim.lsp.buf.rename, "Rename")
-          map("<leader>D", vim.lsp.buf.type_definition, "Type Definition")
           map("<leader>f", function() vim.lsp.buf.format({ async = true }) end, "Format")
-          map("[d", vim.diagnostic.goto_prev, "Previous Diagnostic")
-          map("]d", vim.diagnostic.goto_next, "Next Diagnostic")
           map("<leader>e", vim.diagnostic.open_float, "Show Diagnostic")
         end,
       })
